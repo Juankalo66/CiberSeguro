@@ -5,7 +5,7 @@ import httpx
 
 app = FastAPI(title="ms-breach-check", version="1.0")
 
-# Configurar CORS para que funcione desde GitHub Pages
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -38,7 +38,6 @@ async def check_password(password: str):
                 return {"compromised": True, "times_exposed": int(count)}
         
         return {"compromised": False, "times_exposed": 0}
-    
     except Exception:
         raise HTTPException(status_code=500, detail="Error interno")
 
