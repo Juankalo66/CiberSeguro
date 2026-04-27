@@ -1,82 +1,480 @@
 <!DOCTYPE html>
-<html lang="es">
+
+<html class="dark" lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>CiberSeguro Colombia</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; background: #0b1326; color: white; }
-        input, button { padding: 12px; margin: 10px 0; width: 100%; border-radius: 8px; border: none; font-size: 16px; }
-        button { background: #4f46e5; color: white; cursor: pointer; font-weight: bold; }
-        button:hover { background: #6366f1; }
-        .resultado { margin-top: 20px; padding: 15px; border-radius: 8px; white-space: pre-line; }
-        .filtrada { background: #7f1a1a; border-left: 5px solid #ef4444; }
-        .segura { background: #14532d; border-left: 5px solid #22c55e; }
-        .error { background: #1e1e2f; border-left: 5px solid #f59e0b; }
-        h1 { display: flex; align-items: center; gap: 10px; }
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Panel de Control | CiberSeguro Colombia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#e2dfff",
+                        "on-surface": "#dae2fd",
+                        "on-secondary": "#3f008e",
+                        "tertiary-fixed-dim": "#89ceff",
+                        "on-secondary-fixed": "#25005a",
+                        "on-secondary-container": "#c9aeff",
+                        "on-primary-container": "#dad7ff",
+                        "tertiary-container": "#006693",
+                        "surface-tint": "#c3c0ff",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "primary-container": "#4f46e5",
+                        "surface-container-low": "#131b2e",
+                        "tertiary": "#89ceff",
+                        "secondary": "#d2bbff",
+                        "on-surface-variant": "#c7c4d8",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "secondary-fixed": "#eaddff",
+                        "tertiary-fixed": "#c9e6ff",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-variant": "#2d3449",
+                        "outline": "#918fa1",
+                        "on-tertiary": "#00344d",
+                        "on-tertiary-fixed": "#001e2f",
+                        "primary": "#c3c0ff",
+                        "surface-container-highest": "#2d3449",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#6001d1",
+                        "surface-container": "#171f33",
+                        "surface-container-high": "#222a3d",
+                        "on-primary": "#1d00a5",
+                        "outline-variant": "#464555",
+                        "on-background": "#dae2fd",
+                        "inverse-surface": "#dae2fd",
+                        "inverse-primary": "#4d44e3",
+                        "surface-dim": "#0b1326",
+                        "on-error": "#690005",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "inverse-on-surface": "#283044",
+                        "background": "#0b1326",
+                        "surface-container-lowest": "#060e20",
+                        "surface-bright": "#31394d",
+                        "surface": "#0b1326",
+                        "on-tertiary-container": "#b8e0ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "base": "8px",
+                        "xl": "80px",
+                        "gutter": "24px",
+                        "margin": "32px",
+                        "lg": "48px"
+                    },
+                    "fontFamily": {
+                        "display": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h3": ["Inter"],
+                        "h2": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "h1": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "h3": ["24px", {"lineHeight": "1.4", "letterSpacing": "0em", "fontWeight": "600"}],
+                        "h2": ["30px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+        }
+        .glass {
+            background: rgba(45, 52, 73, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
     </style>
 </head>
-<body>
-    <h1>🛡️ CiberSeguro Colombia</h1>
-    <p>Verifica si tu contraseña ha sido filtrada en brechas de datos. Utiliza el modelo <strong>k-Anonymity</strong> de Have I Been Pwned.</p>
-    
-    <label>🔐 Contraseña a verificar:</label>
-    <input type="password" id="password" placeholder="Escribe tu contraseña aquí...">
-    
-    <button id="verificarBtn">Verificar contraseña</button>
-    
-    <div id="resultado" class="resultado" style="display: none;"></div>
+<body class="font-body-md overflow-x-hidden">
+<!-- Barra lateral de navegación -->
+<aside class="h-screen w-64 border-r fixed left-0 top-0 bg-slate-900 dark:bg-slate-950 border-slate-800/60 shadow-2xl shadow-black z-50 flex flex-col p-4 gap-2 font-sans text-sm hidden md:flex">
+<div class="mb-8 px-4 flex items-center gap-3">
+<div class="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(79,70,229,0.4)]">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<span class="font-bold text-slate-100 text-lg tracking-tighter">CiberSeguro Colombia</span>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 bg-indigo-500/10 text-indigo-400 rounded-lg px-4 py-3 border-l-2 border-indigo-500 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span>General</span>
+</a>
+<a class="flex items-center gap-3 text-slate-400 px-4 py-3 hover:bg-slate-800/40 rounded-lg hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">security</span>
+<span>Detección de Amenazas</span>
+</a>
+<a class="flex items-center gap-3 text-slate-400 px-4 py-3 hover:bg-slate-800/40 rounded-lg hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span>Mapa de Red</span>
+</a>
+<a class="flex items-center gap-3 text-slate-400 px-4 py-3 hover:bg-slate-800/40 rounded-lg hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">warning</span>
+<span>Incidentes</span>
+</a>
+<a class="flex items-center gap-3 text-slate-400 px-4 py-3 hover:bg-slate-800/40 rounded-lg hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Configuración</span>
+</a>
+</nav>
+<div class="mt-auto p-4 glass rounded-xl border border-indigo-500/20">
+<p class="text-xs text-slate-400 mb-2">Administrador del Sistema</p>
+<div class="flex items-center gap-3 mb-4">
+<img alt="Administrador del Sistema" class="w-10 h-10 rounded-full border border-indigo-500/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJi-e_oX6KS7TwGhsHMi4VmGntR5yrQkfknE9-zQyq8pZBZR1ilWT7RM62GmEZLcRoJR8cXQBWdGtXDXGxZjWYfWeqzd0ZWHr6gsn1Ix2cw8865vw4e53NuJxD4bigFY2cJeKP_76oIqcmzM4Y4mo6ZGwYerQSXp6K-0Dmqob62MbqT-QDklCLMXflf5-a5q0oFP-vmCCPdIQaQhh2VXwrHgPxCHD1oQZa5tYH0btLhTEyrjWwjcNVI5Jg69DsYsQ-zj_zvESjtrQF"/>
+<div>
+<h4 class="font-bold text-slate-100 text-xs">Operaciones de Seguridad</h4>
+<p class="text-[10px] text-indigo-400 uppercase tracking-widest font-semibold">Nivel Empresarial</p>
+</div>
+</div>
+<button class="w-full py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg text-xs font-semibold transition-all active:scale-95">
+                Mejorar Seguridad
+            </button>
+</div>
+</aside>
+<!-- Contenido principal -->
+<main class="md:ml-64 min-h-screen pb-xl">
+<!-- Encabezado -->
+<header class="h-20 px-gutter flex items-center justify-between sticky top-0 bg-slate-950/80 backdrop-blur-xl z-40 border-b border-slate-800/50">
+<div>
+<h1 class="font-h2 text-h2 text-on-surface">Panel de Seguridad</h1>
+<p class="text-body-sm text-on-surface-variant">Bienvenido de nuevo. Tu perímetro está seguro.</p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="flex items-center gap-2 px-4 py-2.5 bg-primary-container text-white rounded-xl font-medium text-body-sm hover:opacity-90 active:scale-[0.99] transition-all shadow-[0_0_20px_rgba(79,70,229,0.3)]">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Agregar Dispositivo</span>
+</button>
+<div class="h-10 w-10 glass rounded-full flex items-center justify-center cursor-pointer hover:bg-slate-800/50 transition-colors">
+<span class="material-symbols-outlined text-on-surface">notifications</span>
+</div>
+</div>
+</header>
+<!-- Cuadrícula del Panel -->
+<div class="p-gutter grid grid-cols-1 md:grid-cols-12 gap-gutter max-w-[1440px] mx-auto">
+<!-- Tarjeta de Verificación de Contraseñas -->
+<div class="md:col-span-8 glass p-md rounded-xl flex flex-col justify-start min-h-[400px] relative overflow-hidden group">
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-indigo-500/10 blur-[100px] group-hover:bg-indigo-500/20 transition-colors"></div>
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-h3 text-h3 text-on-surface">Verificador de Contraseñas</h3>
+<p class="text-body-sm text-on-surface-variant">Comprueba si tu contraseña ha sido filtrada</p>
+</div>
+<span class="bg-indigo-500/10 text-indigo-400 px-3 py-1 rounded-full text-label-caps border border-indigo-500/20">k-Anonymity</span>
+</div>
 
-    <p style="font-size: 12px; margin-top: 30px; color: #888;">
-        ⚠️ Tu contraseña nunca sale de tu dispositivo. Solo se envían los primeros 5 caracteres del hash SHA-1.
-    </p>
+<!-- Formulario de verificación -->
+<div class="space-y-6 max-w-lg mx-auto w-full">
+<div class="space-y-2">
+<label for="password" class="text-body-sm font-medium text-on-surface">Contraseña a verificar</label>
+<input type="password" id="password" placeholder="Escribe tu contraseña aquí" class="w-full px-4 py-3 bg-surface-container-low border border-outline-variant/40 rounded-xl text-on-surface focus:outline-none focus:border-indigo-500 transition-colors"/>
+<p class="text-xs text-on-surface-variant/60">Tu contraseña nunca sale de tu dispositivo. Usamos el modelo k-Anonymity de HIBP.</p>
+</div>
+<button id="checkBtn" class="w-full py-3 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl font-semibold transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Verificar Contraseña</span>
+</button>
 
-    <script>
-        // ⚠️ link de Render
-        const API_URL = "https://ciber-seguro-api.onrender.com/api/v1/check/password";
-        
-        document.getElementById("verificarBtn").onclick = async () => {
-            const password = document.getElementById("password").value;
-            const resultadoDiv = document.getElementById("resultado");
-            
-            if (!password) {
-                alert("✏️ Escribe una contraseña para verificar");
-                return;
+<!-- Contenedor del resultado -->
+<div id="resultContainer" class="mt-6 p-4 rounded-xl bg-surface-container-high border border-outline-variant/20 hidden">
+<div id="resultMessage" class="text-center text-body-md"></div>
+<div id="resultDetails" class="text-center text-xs text-on-surface-variant/70 mt-2"></div>
+</div>
+</div>
+</div>
+
+<!-- Alertas de Filtraciones Recientes -->
+<div class="md:col-span-4 glass p-md rounded-xl flex flex-col gap-md border-error/10">
+<div class="flex justify-between items-center">
+<h3 class="font-h3 text-h3 text-on-surface">Alertas en Vivo</h3>
+<span class="flex h-2 w-2 rounded-full bg-error animate-pulse"></span>
+</div>
+<div class="space-y-sm">
+<div class="p-sm bg-error/5 border border-error/20 rounded-lg flex gap-3 group hover:bg-error/10 transition-colors cursor-pointer">
+<div class="bg-error/10 p-2 rounded-lg h-fit">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">gpp_maybe</span>
+</div>
+<div>
+<h4 class="font-bold text-body-sm text-error">Filtración en LinkedIn (2021)</h4>
+<p class="text-xs text-on-surface-variant">700M registros expuestos</p>
+<span class="text-[10px] text-on-surface-variant/50 mt-1 block">Brecha conocida</span>
+</div>
+</div>
+<div class="p-sm bg-surface-container-high border border-outline-variant/20 rounded-lg flex gap-3">
+<div class="bg-indigo-500/10 p-2 rounded-lg h-fit">
+<span class="material-symbols-outlined text-indigo-400">login</span>
+</div>
+<div>
+<h4 class="font-bold text-body-sm text-on-surface">Nuevo Inicio de Sesión</h4>
+<p class="text-xs text-on-surface-variant">MacBook Pro en Bogotá, Colombia</p>
+<span class="text-[10px] text-on-surface-variant/50 mt-1 block">hace 1 hora</span>
+</div>
+</div>
+<div class="p-sm bg-surface-container-high border border-outline-variant/20 rounded-lg flex gap-3">
+<div class="bg-indigo-500/10 p-2 rounded-lg h-fit">
+<span class="material-symbols-outlined text-indigo-400">mail</span>
+</div>
+<div>
+<h4 class="font-bold text-body-sm text-on-surface">Regla de Correo Sospechosa</h4>
+<p class="text-xs text-on-surface-variant">Reenvío activado para spam</p>
+<span class="text-[10px] text-on-surface-variant/50 mt-1 block">hace 4 horas</span>
+</div>
+</div>
+</div>
+<button class="mt-auto text-center w-full py-2 text-label-caps text-on-surface-variant hover:text-white transition-colors">
+                    VER TODOS LOS INCIDENTES
+                </button>
+</div>
+
+<!-- Gráfico de Historial de Filtraciones -->
+<div class="md:col-span-8 glass p-md rounded-xl min-h-[300px] flex flex-col">
+<div class="flex justify-between items-center mb-md">
+<div>
+<h3 class="font-h3 text-h3 text-on-surface">Vectores de Filtración</h3>
+<p class="text-body-sm text-on-surface-variant">Análisis mensual de intentos de explotación</p>
+</div>
+<div class="flex gap-2">
+<div class="flex items-center gap-2 text-xs text-on-surface-variant">
+<span class="w-3 h-3 rounded-full bg-indigo-500"></span> Phishing
+                        </div>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant">
+<span class="w-3 h-3 rounded-full bg-tertiary"></span> Malware
+                        </div>
+</div>
+</div>
+<div class="flex-1 flex items-end justify-between gap-4 pt-4">
+<div class="w-full bg-surface-container rounded-t-lg h-1/2 relative group">
+<div class="absolute bottom-0 left-0 right-0 bg-indigo-500 rounded-t-lg h-3/4 opacity-80 transition-all group-hover:opacity-100"></div>
+<div class="absolute bottom-0 left-0 right-0 bg-tertiary/40 rounded-t-lg h-1/4"></div>
+</div>
+<div class="w-full bg-surface-container rounded-t-lg h-2/3 relative group">
+<div class="absolute bottom-0 left-0 right-0 bg-indigo-500 rounded-t-lg h-1/2 opacity-80 transition-all group-hover:opacity-100"></div>
+<div class="absolute bottom-0 left-0 right-0 bg-tertiary/40 rounded-t-lg h-1/3"></div>
+</div>
+<div class="w-full bg-surface-container rounded-t-lg h-1/3 relative group">
+<div class="absolute bottom-0 left-0 right-0 bg-indigo-500 rounded-t-lg h-2/3 opacity-80 transition-all group-hover:opacity-100"></div>
+<div class="absolute bottom-0 left-0 right-0 bg-tertiary/40 rounded-t-lg h-1/5"></div>
+</div>
+<div class="w-full bg-surface-container rounded-t-lg h-3/4 relative group">
+<div class="absolute bottom-0 left-0 right-0 bg-indigo-500 rounded-t-lg h-5/6 opacity-80 transition-all group-hover:opacity-100"></div>
+<div class="absolute bottom-0 left-0 right-0 bg-tertiary/40 rounded-t-lg h-1/2"></div>
+</div>
+<div class="w-full bg-surface-container rounded-t-lg h-1/2 relative group">
+<div class="absolute bottom-0 left-0 right-0 bg-indigo-500 rounded-t-lg h-1/4 opacity-80 transition-all group-hover:opacity-100"></div>
+<div class="absolute bottom-0 left-0 right-0 bg-tertiary/40 rounded-t-lg h-2/3"></div>
+</div>
+<div class="w-full bg-surface-container rounded-t-lg h-4/5 relative group">
+<div class="absolute bottom-0 left-0 right-0 bg-indigo-500 rounded-t-lg h-4/5 opacity-80 transition-all group-hover:opacity-100"></div>
+<div class="absolute bottom-0 left-0 right-0 bg-tertiary/40 rounded-t-lg h-1/3"></div>
+</div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] text-on-surface-variant font-medium tracking-widest px-1">
+<span>ENE</span><span>FEB</span><span>MAR</span><span>ABR</span><span>MAY</span><span>JUN</span>
+</div>
+</div>
+
+<!-- Estado de Monitoreo Familiar -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<div class="glass p-md rounded-xl">
+<div class="flex items-center justify-between mb-md">
+<h3 class="font-h3 text-h3 text-on-surface">Guardián Familiar</h3>
+<span class="material-symbols-outlined text-indigo-400">family_restroom</span>
+</div>
+<div class="space-y-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img alt="Sofía Méndez" class="w-10 h-10 rounded-full border border-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrfUQR9l2iAjValNZFkIEuRXIZwIYjtr5VlRVd1w7HseNHSqdoliNsu_-FpqhxXxhu9AjC1TfZghHPS1avo429XigFHWPU1rCKONaEFv0wL6um7wVxCv222B7j8lAGXqzjg3R77zjfeYtDoHm-_3xu13L5ntStQWPhOXrH9AmKKFQFUhj0axEOg-4Nd8Nf4ll26ASsHYc5Hcgm6xL0J-q5_tiJs5A2vWz156rJh9U8ZFJA3ovoleSry_AxtSRJe5lQ4MalcSUN3I8q"/>
+<div>
+<h4 class="text-body-sm font-bold">Sofía Méndez</h4>
+<p class="text-xs text-indigo-400">3 dispositivos protegidos</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-indigo-400">shield</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img alt="Mateo Méndez" class="w-10 h-10 rounded-full border border-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx10dNwXtkXTr6bfPeq4eyV3LA1DrfbuQMhuuRVtIBm3wxwozFy_ex9pKEtF_k9lHksthFl_Ixil0toqUCsUB_I1VRQn3bAOgbInwyShWAl7wfEwOkHiv3gJ1Cm-yoX_3N0KToSsesTCE5UxIDQV9Dnl9QpPfl6oxFDhaSDUNHxdwG2krtc-WWmjX8k773SJc5Lc3i2v8fbYnKhD7Ki6NGBV684jP4Vwu5rc6ubCJF60YW42ROoDyxPcefzqv7j_baE-g-P3Kc_OR5"/>
+<div>
+<h4 class="text-body-sm font-bold">Mateo Méndez</h4>
+<p class="text-xs text-error">1 riesgo identificado</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-error">warning</span>
+</div>
+</div>
+</div>
+<div class="bg-indigo-500 p-md rounded-xl flex flex-col gap-3 shadow-[0_20px_40px_rgba(79,70,229,0.3)] group hover:-translate-y-1 transition-transform cursor-pointer">
+<div class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white">add_moderator</span>
+</div>
+<div>
+<h4 class="font-h3 text-h3 text-white">Agregar Dispositivo</h4>
+<p class="text-body-sm text-white/80">Expande tu perímetro de seguridad al instante.</p>
+</div>
+<div class="flex justify-end mt-2">
+<span class="material-symbols-outlined text-white group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+<footer class="w-full border-t mt-auto border-slate-900 bg-slate-950 font-sans text-xs text-slate-500">
+<div class="flex flex-col md:flex-row justify-between items-center py-8 px-8 max-w-[1440px] mx-auto gap-4">
+<div class="flex items-center gap-2">
+<span class="font-semibold text-slate-300">CiberSeguro Colombia</span>
+<span>|</span>
+<p>© 2024 CiberSeguro Colombia. Seguridad sin fricciones garantizada.</p>
+</div>
+<div class="flex gap-6">
+<a class="text-slate-500 hover:text-slate-300 transition-colors" href="#">Documentación</a>
+<a class="text-slate-500 hover:text-slate-300 transition-colors" href="#">Política de Privacidad</a>
+<a class="text-slate-500 hover:text-slate-300 transition-colors" href="#">Estado</a>
+<a class="text-slate-500 hover:text-slate-300 transition-colors" href="#">Contactar Soporte</a>
+</div>
+</div>
+</footer>
+</main>
+
+<!-- JavaScript para conectar con el microservicio en Render (CORREGIDO) -->
+<script>
+    // ✅ CORREGIDO: Ahora apunta a tu backend en la nube
+    const API_URL = "https://ciber-seguro-api.onrender.com/api/v1/check/password";
+    
+    const checkBtn = document.getElementById('checkBtn');
+    const passwordInput = document.getElementById('password');
+    const resultContainer = document.getElementById('resultContainer');
+    const resultMessage = document.getElementById('resultMessage');
+    const resultDetails = document.getElementById('resultDetails');
+
+    async function checkPassword() {
+        const password = passwordInput.value.trim();
+
+        if (!password) {
+            alert('Por favor, escribe una contraseña para verificar.');
+            return;
+        }
+
+        // Mostrar estado de carga
+        checkBtn.disabled = true;
+        checkBtn.innerHTML = `
+            <span class="material-symbols-outlined text-[18px] animate-spin">progress_activity</span>
+            <span>Verificando...</span>
+        `;
+
+        try {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ password: password })
+            });
+
+            const data = await response.json();
+
+            // Mostrar el resultado
+            resultContainer.classList.remove('hidden');
+
+            if (data.compromised) {
+                resultMessage.innerHTML = `
+                    <span class="material-symbols-outlined text-error text-4xl mb-2">warning</span>
+                    <p class="font-bold text-error text-lg">¡ALERTA! Contraseña filtrada</p>
+                `;
+                resultDetails.innerHTML = `
+                    Esta contraseña ha sido encontrada <strong>${data.times_exposed.toLocaleString()}</strong> veces en filtraciones de datos.
+                    <br><span class="text-indigo-400">⚠️ Cámbiala inmediatamente.</span>
+                `;
+                resultContainer.classList.add('border-error/30');
+                resultContainer.classList.remove('border-green-500/30');
+            } else {
+                resultMessage.innerHTML = `
+                    <span class="material-symbols-outlined text-green-400 text-4xl mb-2">verified</span>
+                    <p class="font-bold text-green-400 text-lg">¡Segura!</p>
+                `;
+                resultDetails.innerHTML = `
+                    No se encontró esta contraseña en ninguna filtración conocida.
+                    <br><span class="text-indigo-400">✅ Mantén buenas prácticas de seguridad.</span>
+                `;
+                resultContainer.classList.add('border-green-500/30');
+                resultContainer.classList.remove('border-error/30');
             }
-            
-            resultadoDiv.style.display = "block";
-            resultadoDiv.innerHTML = "🔍 Verificando... Esto puede tomar unos segundos.";
-            resultadoDiv.className = "resultado";
-            
-            try {
-                const response = await fetch(API_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ password: password })
-                });
-                
-                const data = await response.json();
-                
-                if (data.compromised) {
-                    resultadoDiv.innerHTML = `
-                        ❌ ¡ALERTA DE SEGURIDAD!\n\n
-                        Esta contraseña ha sido encontrada en ${data.times_exposed.toLocaleString()} filtraciones de datos.\n\n
-                        ⚠️ Cámbiala INMEDIATAMENTE. No la uses en ningún servicio.\n
-                        ✅ Usa un administrador de contraseñas y activa verificación en dos pasos.
-                    `;
-                    resultadoDiv.className = "resultado filtrada";
-                } else {
-                    resultadoDiv.innerHTML = `
-                        ✅ ¡CONTRASEÑA SEGURA!\n\n
-                        No se encontró esta contraseña en ninguna filtración conocida.\n\n
-                        👍 Mantén buenas prácticas: no la reutilices y actívate 2FA cuando sea posible.
-                    `;
-                    resultadoDiv.className = "resultado segura";
-                }
-            } catch (error) {
-                resultadoDiv.innerHTML = "❌ Error de conexión con el servicio de verificación.\n\nAsegúrate de que el backend esté desplegado en Render y que la URL sea correcta.";
-                resultadoDiv.className = "resultado error";
-            }
-        };
-    </script>
+        } catch (error) {
+            console.error('Error al conectar con el microservicio:', error);
+            resultContainer.classList.remove('hidden');
+            resultMessage.innerHTML = `
+                <span class="material-symbols-outlined text-error text-4xl mb-2">cloud_off</span>
+                <p class="font-bold text-error text-lg">Error de conexión</p>
+            `;
+            resultDetails.innerHTML = `
+                No se pudo conectar con el servicio de verificación.
+                <br><span class="text-indigo-400">El backend está despertando. Intenta de nuevo en 10 segundos.</span>
+            `;
+        } finally {
+            // Restaurar botón
+            checkBtn.disabled = false;
+            checkBtn.innerHTML = `
+                <span class="material-symbols-outlined text-[18px]">verified</span>
+                <span>Verificar Contraseña</span>
+            `;
+        }
+    }
+
+    checkBtn.addEventListener('click', checkPassword);
+    // Permitir verificar presionando Enter
+    passwordInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            checkPassword();
+        }
+    });
+</script>
+
+<!-- Barra de navegación inferior móvil -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-slate-950/90 backdrop-blur-xl border-t border-slate-800/50 flex justify-around items-center h-16 z-50">
+<a class="text-indigo-400 flex flex-col items-center" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-[10px]">Inicio</span>
+</a>
+<a class="text-slate-400 flex flex-col items-center" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="text-[10px]">Amenazas</span>
+</a>
+<a class="text-slate-400 flex flex-col items-center" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="text-[10px]">Mapa</span>
+</a>
+<a class="text-slate-400 flex flex-col items-center" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px]">Config</span>
+</a>
+</div>
 </body>
 </html>
