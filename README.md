@@ -46,9 +46,8 @@ Analizador de robustez de contraseñas offline para mayor seguridad.
 
 ## ¿Cómo Funciona?
 
-1. **Ingresa tu Email** - Introduce el correo que deseas monitorear
+1. **Ingresa tu Contraseña** - Introduce la contraseña que deseas monitorear
 2. **Analizamos la Red** - Buscamos coincidencias en bases de datos filtradas
-3. **Score de Riesgo** - Obtienes un reporte detallado con recomendaciones
 
 ## Estadísticas
 
@@ -56,25 +55,6 @@ Analizador de robustez de contraseñas offline para mayor seguridad.
 - 12 mil millones de cuentas monitoreadas
 - Búsqueda en tiempo real
 - 99.9% de precisión
-
-
-## Testimonios
-
-> "Me alertó de que mi contraseña de LinkedIn había sido filtrada antes de que saliera en las noticias. Cambié todo a tiempo."
-> — Ricardo M., Usuario Premium
-
-> "El panel familiar es increíble. Puedo estar tranquilo sabiendo que mis padres están protegidos."
-> — Elena A., Plan Family
-
-## Contribuciones
-
-Las contribuciones son bienvenidas. Por favor:
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
 
 ## Licencia
 
@@ -85,6 +65,8 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 **Christian Lauck Zuluaga**
 - GitHub: [@clauck89](https://github.com/clauck89)
 
+**Juan Carlos Alonso Rozo**
+- GitHub: https://github.com/juankalo66
 ---
 
 **** © 2024 - Frictionless Safety Guaranteed. Protegiendo identidades digitales con IA avanzada.
