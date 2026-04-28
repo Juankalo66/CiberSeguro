@@ -5,7 +5,7 @@
 
 ## Descripción
 
-**CiberSeguro-Colombia** es una plataforma moderna de ciberseguridad que escanea la Dark Web y bases de datos filtradas en tiempo real para proteger tu identidad digital. Descubre si tu correo ha sido hackeado antes de ser una víctima.
+**CiberSeguro-Colombia** es una plataforma moderna de ciberseguridad que escanea la Dark Web y bases de datos filtradas en tiempo real para proteger tu identidad digital. Descubre si tu contraseña ha sido filtrada por hackers antes de ser una víctima.
 
 Nos especializamos en:
 - Búsqueda privada y cifrada de tu información
