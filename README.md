@@ -62,11 +62,8 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 
 ## Contacto
 
-**Christian Lauck Zuluaga**
-- GitHub: [@clauck89](https://github.com/clauck89)
-
 **Juan Carlos Alonso Rozo**
 - GitHub: https://github.com/juankalo66
 ---
 
-**** © 2024 - Frictionless Safety Guaranteed. Protegiendo identidades digitales con IA avanzada.
+
